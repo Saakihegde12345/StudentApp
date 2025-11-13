@@ -2,7 +2,9 @@
   # Run commands from the `frontend` directory (base) so paths below are relative to it
   base = "frontend"
   # The Angular build output is written to `dist/frontend` inside the frontend folder
-  publish = "dist/frontend"
+  # The Angular builder places the browser-optimised output in `dist/frontend/browser`
+  # Publish that subdirectory so Netlify serves the `index.html` at the site root.
+  publish = "dist/frontend/browser"
   # Use the existing npm script that generates env and builds for Netlify
   command = "npm ci && npm run build:netlify"
 
