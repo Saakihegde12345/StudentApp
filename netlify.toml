@@ -3,7 +3,8 @@
   base = "frontend"
   # The Angular build output is written to `dist/frontend` inside the frontend folder
   publish = "dist/frontend"
-  command = "npm ci && npm run generate:env && npm run build -- --configuration production"
+  # Use the existing npm script that generates env and builds for Netlify
+  command = "npm ci && npm run build:netlify"
 
 [[redirects]]
   from = "/*"
