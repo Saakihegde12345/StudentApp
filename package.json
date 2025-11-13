@@ -1,0 +1,15 @@
+{
+  "name": "studentapp-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "node ./scripts/bootstrap.js",
+    "postinstall": "npm run install:all",
+  "start:backend": "npm --prefix backend run start",
+  "start:frontend": "npm --prefix frontend run start",
+  "start": "node ./scripts/start.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

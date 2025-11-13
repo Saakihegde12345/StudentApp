@@ -1,0 +1,9 @@
+[build]
+  base = "frontend"
+  publish = "frontend/dist/frontend"
+  command = "npm ci && npm run generate:env && npm run build -- --configuration production"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
