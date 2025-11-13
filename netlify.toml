@@ -1,6 +1,8 @@
 [build]
+  # Run commands from the `frontend` directory (base) so paths below are relative to it
   base = "frontend"
-  publish = "frontend/dist/frontend"
+  # The Angular build output is written to `dist/frontend` inside the frontend folder
+  publish = "dist/frontend"
   command = "npm ci && npm run generate:env && npm run build -- --configuration production"
 
 [[redirects]]
