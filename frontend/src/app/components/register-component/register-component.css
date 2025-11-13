@@ -1,0 +1,4 @@
+.material-form { max-width: 420px; display:flex; flex-direction:column; gap:12px; }
+.full-width { width:100%; }
+.form-actions { display:flex; gap:12px; }
+.register-panel { margin: 24px auto; }

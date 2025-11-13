@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="app-title">{{ title() }}</span>
+  <span class="spacer"></span>
+  <button mat-button [routerLink]="'/'"><mat-icon>home</mat-icon>&nbsp;Home</button>
+  <button mat-flat-button color="accent" [routerLink]="'/create'"><mat-icon>person_add</mat-icon>&nbsp;Add Student</button>
+
+  <ng-container *ngIf="user$ | async as user; else loggedOut">
+    <span class="user-email">{{ user.email }}</span>
+    <button mat-button (click)="logout()"><mat-icon>logout</mat-icon>&nbsp;Logout</button>
+  </ng-container>
+
+  <ng-template #loggedOut>
+    <button mat-button [routerLink]="'/login'"><mat-icon>login</mat-icon>&nbsp;Login</button>
+    <button mat-button [routerLink]="'/register'">Register</button>
+  </ng-template>
+  </mat-toolbar>
+
+<div class="container app-container">
+  <router-outlet></router-outlet>
+</div>

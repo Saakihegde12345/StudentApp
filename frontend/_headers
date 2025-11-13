@@ -1,0 +1,12 @@
+/*
+  Security headers recommended for Netlify. Adjust as needed.
+*/
+
+/*
+  X-Frame-Options and X-Content-Type-Options
+*/
+/  X-Frame-Options: DENY
+/  X-Content-Type-Options: nosniff
+/  Referrer-Policy: no-referrer-when-downgrade
+/  X-XSS-Protection: 1; mode=block
+/  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload

@@ -1,0 +1,8 @@
+.material-form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	max-width: 720px;
+}
+.full-width { width: 100%; }
+.form-actions { display:flex; gap:12px; margin-top:8px; }
