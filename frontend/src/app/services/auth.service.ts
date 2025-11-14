@@ -10,14 +10,23 @@ export class AuthService {
 
   constructor() {
     // initialize current user
-    supabase.auth.getSession().then(({ data }) => {
-      this._user$.next(data?.session?.user ?? null);
-    });
+    // initialize current user (catch errors so storage/lock failures don't crash)
+    supabase.auth.getSession()
+      .then(({ data }) => this._user$.next(data?.session?.user ?? null))
+      .catch(() => this._user$.next(null));
 
-    // listen for changes
-    supabase.auth.onAuthStateChange((_event, session) => {
-      this._user$.next(session?.user ?? null);
-    });
+    // listen for changes — protect the handler against unexpected errors
+    try {
+      supabase.auth.onAuthStateChange((_event, session) => {
+        try {
+          this._user$.next(session?.user ?? null);
+        } catch {
+          this._user$.next(null);
+        }
+      });
+    } catch {
+      // ignore subscription errors
+    }
   }
 
   signOut(): Observable<any> {

@@ -47,7 +47,10 @@ if (SUPABASE_URL && SUPABASE_KEY) {
   // attempt async/lock-based storage. If you require persisted sessions,
   // you can remove `persistSession: false` and provide a robust storage.
   _supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-    auth: { persistSession: false, storage: safeStorage as any }
+    // Disable session persistence and automatic token refresh to avoid
+    // Navigator LockManager-related errors in some browsers/environments.
+    // We still provide a synchronous storage adapter to be safe.
+    auth: { persistSession: false, storage: safeStorage as any, autoRefreshToken: false }
   });
 } else {
   // Provide a safe stub so the app doesn't crash at runtime when keys are missing.
