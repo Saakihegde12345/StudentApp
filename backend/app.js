@@ -18,7 +18,22 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// Configure CORS from environment for production safety. If none provided,
+// fall back to permissive behavior for local development.
+const allowedOrigins = [];
+if (process.env.FRONTEND_URL) allowedOrigins.push(process.env.FRONTEND_URL);
+if (process.env.NETLIFY_URL) allowedOrigins.push(process.env.NETLIFY_URL);
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // allow requests with no origin (e.g. curl, server-to-server)
+        if (!origin) return callback(null, true);
+        // if no allowed origins are configured, allow all
+        if (allowedOrigins.length === 0) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) return callback(null, true);
+        return callback(new Error('CORS policy does not allow this origin'), false);
+    }
+}));
 app.use(express.json());
 
 const studentRoutes = require("./routes/routes")

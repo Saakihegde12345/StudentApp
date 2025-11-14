@@ -10,7 +10,9 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class StudentService {
-  private api = 'http://localhost:3000/api/students'
+  // Read runtime env injected by public/env.js (generated at build time)
+  private readonly _env = (window as any).__env || {};
+  private api = ((this._env.API_BASE_URL || '').replace(/\/$/, '')) + '/api/students';
 
   private http = inject(HttpClient);
   private auth = inject(AuthService);
