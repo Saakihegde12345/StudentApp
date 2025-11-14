@@ -18,8 +18,13 @@ function makeStub() {
       getSession: () => Promise.resolve({ data: { session: null } }),
       onAuthStateChange: (_cb: any) => ({ data: { subscription: { unsubscribe: () => {} } } }),
       signOut: () => Promise.resolve({ data: null, error: new Error('Supabase not configured') }),
-      signInWithOAuth: (_: any) => Promise.resolve({ data: null, error: new Error('Supabase not configured') }),
-      signInWithOtp: (_: any) => Promise.resolve({ data: null, error: new Error('Supabase not configured') })
+        signInWithOAuth: (_: any) => Promise.resolve({ data: null, error: new Error('Supabase not configured') }),
+        signInWithOtp: (_: any) => Promise.resolve({ data: null, error: new Error('Supabase not configured') }),
+        // Provide common v2-compatible auth methods used by the app so local
+        // development doesn't crash when runtime env is missing. These return
+        // a shaped response similar to the real client (data + error).
+        signInWithPassword: (_: { email: string; password: string }) => Promise.resolve({ data: null, error: new Error('Supabase not configured') }),
+        signUp: (_: { email: string; password: string }) => Promise.resolve({ data: null, error: new Error('Supabase not configured') })
     }
   } as unknown as SupabaseClient;
 }

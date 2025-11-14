@@ -1,6 +1,7 @@
 <h5>Edit Student</h5>
-<div class="container">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="material-form">
+<div class="page-container">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="material-form">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Name</mat-label>
             <mat-icon matPrefix>person</mat-icon>
@@ -35,5 +36,6 @@
             <button mat-flat-button color="primary" type="submit">Save</button>
             <button mat-stroked-button type="button" (click)="router.navigate(['/'])">Cancel</button>
         </div>
-    </form>
+        </form>
+    </div>
 </div>

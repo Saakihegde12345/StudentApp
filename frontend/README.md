@@ -57,3 +57,33 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Local runtime environment for Supabase (dev)
+
+The frontend reads runtime values from `window.__env` (file `public/env.js`) so the same build can be deployed to different hosts.
+
+To create a local `public/env.js` for development without exposing server secrets:
+
+1. Create a `public/env.js` file in `frontend/public` with these keys:
+
+```js
+window.__env = {
+	SUPABASE_URL: 'https://your-project.supabase.co',
+	SUPABASE_ANON_KEY: 'public-anon-key-goes-here',
+	API_BASE_URL: 'http://localhost:3000'
+};
+```
+
+2. OR use the helper script from the `frontend` folder which will read from environment variables or the repo `.env` (but will NEVER write or expose a service-role key):
+
+PowerShell example:
+```pwsh
+cd frontend
+# set env vars in the current shell (or ensure repo .env contains SUPABASE_ANON_KEY)
+$env:SUPABASE_URL = 'https://your-project.supabase.co'
+$env:SUPABASE_ANON_KEY = 'public-anon-key'
+node ./scripts/create-local-env.js
+npm start
+```
+
+Important: do NOT put `SUPABASE_SERVICE_ROLE_KEY` into the frontend `public/env.js` — that key must remain server-side only.

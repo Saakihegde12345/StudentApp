@@ -6,8 +6,14 @@
   <button mat-flat-button color="accent" [routerLink]="'/create'"><mat-icon>person_add</mat-icon>&nbsp;Add Student</button>
 
   <ng-container *ngIf="user$ | async as user; else loggedOut">
-    <span class="user-email">{{ user.email }}</span>
-    <button mat-button (click)="logout()"><mat-icon>logout</mat-icon>&nbsp;Logout</button>
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+      <span class="user-avatar">{{ user.email?.split('@')[0]?.charAt(0)?.toUpperCase() }}</span>
+      <span class="user-email">{{ user.email }}</span>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>&nbsp;Logout</button>
+    </mat-menu>
   </ng-container>
 
   <ng-template #loggedOut>
