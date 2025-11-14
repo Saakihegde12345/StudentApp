@@ -11,8 +11,8 @@
         <div class="student-row" *ngFor="let student of studentList">
             <div class="col avatar-col">
                 <div class="avatar" matTooltip="{{student.name}}">
-                    <mat-icon class="avatar-icon" aria-hidden="true">person</mat-icon>
                     <span class="avatar-initials">{{ initials(student.name) }}</span>
+                    <mat-icon class="avatar-icon" aria-hidden="true">person</mat-icon>
                 </div>
             </div>
             <div class="col name-col">{{ student.name }}</div>

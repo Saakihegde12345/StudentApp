@@ -19,12 +19,17 @@
 	margin-right: 12px;
 }
 .avatar-icon {
-	font-size: 18px;
-	opacity: 0.9;
-	position: absolute;
+    font-size: 18px;
+    opacity: 0.95;
+    position: static;
 }
-.avatar-initials { position: relative; z-index: 1; }
+
+.avatar-initials { position: relative; z-index: 2; font-size: 15px; line-height: 1; }
 .avatar { position: relative; }
+
+/* If initials are empty, hide the span; if initials are present, hide the icon */
+.avatar-initials:empty { display: none; }
+.avatar-initials:not(:empty) + .avatar-icon { display: none; }
 .details {
 	flex: 1 1 auto;
 }
